@@ -12,12 +12,12 @@ function myCity()
 function getRandomFood(position)
 {
   let submit = document.getElementById("submit");
-  let lat = position.coords.latitude;
-  let lng = position.coords.longitude;
-  let distance = document.getElementById('distance').value;
 
   submit.addEventListener("click", () => {
     let food = document.getElementById("food").value;
+    let distance = document.getElementById('distance').value;
+    let lat = position.coords.latitude;
+    let lng = position.coords.longitude;
 
     axios.get("https://api.yelp.com/v3/businesses/search", {
       headers: {
@@ -27,7 +27,7 @@ function getRandomFood(position)
         latitude: lat,
         longitude: lng,
         categories: food,
-        radius: distance,
+        radius: getDistance(distance),
         term: "restaurants",
         limit: 50
       }
@@ -40,9 +40,6 @@ function getRandomFood(position)
       let randomNum = Math.floor(Math.random() * length);
       let randomFood = response.data.businesses[randomNum];
 
-      console.log(response);
-      console.log(randomFood);
-
       picture.src = randomFood.image_url;
       name.textContent = randomFood.name;
       yelp.style.display = "block";
@@ -50,4 +47,14 @@ function getRandomFood(position)
     })
     .catch((error) => {console.log(error);});
   });
+}
+
+function getDistance(num){
+  if(num < 1){
+    num = 1;
+  }else if(num > 25){
+    num = 25;
+  }
+
+  return Math.floor(num * 1609.34);
 }
