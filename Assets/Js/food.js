@@ -14,6 +14,7 @@ function getRandomFood(position)
   let submit = document.getElementById("submit");
   let lat = position.coords.latitude;
   let lng = position.coords.longitude;
+  let distance = document.getElementById('distance').value;
 
   submit.addEventListener("click", () => {
     let food = document.getElementById("food").value;
@@ -26,6 +27,7 @@ function getRandomFood(position)
         latitude: lat,
         longitude: lng,
         categories: food,
+        radius: distance,
         term: "restaurants",
         limit: 50
       }

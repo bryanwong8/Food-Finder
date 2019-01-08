@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "manifest_version": 2,
-  "name": "Random Food",
+  "name": "Food Finder",
   "icons": {"128": "photos/food.png"},
   "permissions": [
     "geolocation",
